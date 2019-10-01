@@ -47,7 +47,7 @@ class App extends React.Component {
 
   submitTodo = e => {
     e.preventDefault();
-    this.addTodo(this.state.task)
+    this.addTodo(this.state.task);
 };
 
   toggleTodo = id => {
@@ -64,7 +64,13 @@ class App extends React.Component {
         }
       })
     })
-  }
+  };
+
+  removeCompletedTodos = () => {
+    this.setState({
+      todos: this.state.todos.filter(item => !item.completed)
+    });
+  };
 
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -74,7 +80,7 @@ class App extends React.Component {
       <div>
         <h1>Len's Todo App</h1>
         <TodoList todos={this.state.todos} toggleTodo={this.toggleTodo}/>
-        <TodoForm addTodo={this.addTodo} handleChanges={this.handleChanges} submitTodo={this.submitTodo} />
+        <TodoForm addTodo={this.addTodo} handleChanges={this.handleChanges} submitTodo={this.submitTodo} removeCompletedTodos={this.removeCompletedTodos} />
       </div>
     );
   }

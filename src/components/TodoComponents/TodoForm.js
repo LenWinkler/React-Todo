@@ -19,7 +19,7 @@ class TodoForm extends React.Component {
                             onChange={this.props.handleChanges}
                         />
                         <button type="submit">Add todo</button>
-                        <button>Clear completed todos</button>
+                        <button onClick={this.props.removeCompletedTodos}>Clear completed todos</button>
                     </form>
                 )
     }
