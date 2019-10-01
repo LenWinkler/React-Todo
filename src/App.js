@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from "./components/TodoComponents/TodoList";
 import TodoForm from "./components/TodoComponents/TodoForm";
+import "./components/TodoComponents/Todo.css";
 
 const todos = [{
   task: 'Create a todo list app',
@@ -47,7 +48,23 @@ class App extends React.Component {
   submitTodo = e => {
     e.preventDefault();
     this.addTodo(this.state.task)
-}
+};
+
+  toggleTodo = id => {
+    console.log('toggle id', id);
+    this.setState({
+      todos: this.state.todos.map(item => {
+        if (item.id === id) {
+          return {
+            ...item,
+            completed: !item.completed
+          };
+        } else {
+          return item;
+        }
+      })
+    })
+  }
 
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -56,7 +73,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Len's Todo App</h1>
-        <TodoList todos={this.state.todos}/>
+        <TodoList todos={this.state.todos} toggleTodo={this.toggleTodo}/>
         <TodoForm addTodo={this.addTodo} handleChanges={this.handleChanges} submitTodo={this.submitTodo} />
       </div>
     );
